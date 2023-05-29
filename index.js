@@ -39,13 +39,6 @@ const limiter = rateLimit({
     max: 66, // Maximum 66 requests per 13 minutes
   });
 
-// ...
-app.all('/', (req, res) => {
-  res.status(405).json({ error: 'Method Not Allowed' });
-  res.end(); // Terminate the connection immediately
-});
-
-
 app.post('/', limiter, async (req, res) => {
   try {
     const { message } = req.body;
