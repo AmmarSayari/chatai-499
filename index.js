@@ -9,10 +9,7 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
-app.listen(process.env.PORT || 3000, () => {
-  console.log('chatai app listening');
-});
-
+const port = process.env.PORT || 3001;
 
 
 const configuration = new Configuration({
@@ -23,7 +20,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
 
-app.use(cors());
+//app.use(cors());
 app.use(bodyParser.json());
 
 
@@ -69,7 +66,10 @@ app.post('/',limiter, async (req, res) => {
       
 });
 
-app.listen (port, () => {
-    console.log(`chatai app listening`)});
+app.use(cors());
+
+app.listen(port, () => {
+  console.log('chatai app listening on port', port);
+});
 
     
