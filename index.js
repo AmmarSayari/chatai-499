@@ -9,12 +9,14 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
-const port =  3001;
+const port = process.env.PORT || 3001;
+
 
 const configuration = new Configuration({
-    organization: "org-hF6GBubhzT2aTitqR0KK7NRg",
-    apiKey: "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",
-});
+    organization: process.env.OPENAI_ORG_ID,
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+  
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
 
