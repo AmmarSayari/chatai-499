@@ -9,7 +9,10 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
-const port = process.env.PORT;
+app.listen(process.env.PORT || 3000, () => {
+  console.log('chatai app listening');
+});
+
 
 
 const configuration = new Configuration({
