@@ -2,9 +2,9 @@
   "name": "499",
   "version": "1.0.0",
   "description": "Your description",
-  "main": "indextest.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node indextest.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
