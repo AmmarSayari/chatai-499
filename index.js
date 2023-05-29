@@ -20,6 +20,10 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
 
+app.use(cors());
+
+
+
 //app.use(cors());
 app.use(bodyParser.json());
 
