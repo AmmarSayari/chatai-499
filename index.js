@@ -11,12 +11,15 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 const port = process.env.PORT || 3001;
 
-console.log('OPENAI_ORG_ID:', process.env.OPENAI_ORG_ID);
-console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
+const organization_ID = process.env.OPENAI_ORG_ID;
+const api_id = process.env.OPENAI_API_KEY;
+
+console.log('OPENAI_ORG_ID:', organization_ID);
+console.log('OPENAI_API_KEY:', api_id);
 
 const configuration = new Configuration({
-    organization: process.env.OPENAI_ORG_ID,
-    apiKey: process.env.OPENAI_API_KEY,
+    organization: organization_ID,
+    apiKey: api_id
   });
   
 const openai = new OpenAIApi(configuration);
