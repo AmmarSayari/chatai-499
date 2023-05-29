@@ -11,6 +11,8 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 const port = process.env.PORT || 3001;
 
+console.log('OPENAI_ORG_ID:', process.env.OPENAI_ORG_ID);
+console.log('OPENAI_API_KEY:', process.env.OPENAI_API_KEY);
 
 const configuration = new Configuration({
     organization: process.env.OPENAI_ORG_ID,
