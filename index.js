@@ -39,7 +39,7 @@ const limiter = rateLimit({
     max: 66, // Maximum 66 requests per 13 minutes
   });
 
-app.post('/',limiter, async (req, res) => {
+app.get('/',limiter, async (req, res) => {
 
     const { message } = req.body;
 
