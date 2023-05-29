@@ -9,7 +9,7 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT;
 
 
 const configuration = new Configuration({
