@@ -39,41 +39,54 @@ const limiter = rateLimit({
     max: 66, // Maximum 66 requests per 13 minutes
   });
 
-app.post('/',limiter, async (req, res) => {
+// ...
+app.all('/', (req, res) => {
+  res.status(405).json({ error: 'Method Not Allowed' });
+  res.end(); // Terminate the connection immediately
+});
 
+
+app.post('/', limiter, async (req, res) => {
+  try {
     const { message } = req.body;
 
     console.log('Received message:', message);
 
     const response = await openai.createCompletion({
-    
+      model: 'text-davinci-003',
+      prompt: `
+        Pretend you are an AI assistant for cars and car maintenance and spare parts expert.
+        User: How can I get help with car maintenance?
+        AI Assistant: You've come to the right place! I'm here to assist you with any car maintenance or spare parts queries.
+        User: ${message}
+        AI Assistant:
+      `,
+      max_tokens: 66,
+      temperature: 1.5,
+    });
 
-        model: "text-davinci-003",
-        prompt: `
-        
-        
-        Pretend you are an AI assistant for cars and cars maintenance and spare parts expert.
-    User: How can I get help with car maintenance?
-    AI Assistant: You've come to the right place! I'm here to assist you with any car maintenance or spare parts queries.
-    User: ${message}
-    AI Assistant:
-        `
-        ,
-        max_tokens: 66,
-        temperature: 1.5
+    console.log('AI Assistant response:', response.data.choices[0].text);
+    console.log(response.data);
+
+    if (response.data && response.data.choices && response.data.choices[0]) {
+      res.json({
+        message: response.data.choices[0].text,
       });
-
-      console.log('AI Assistant response:', response.data.choices[0].text)
-      console.log(response.data)
-
-      
-        if(response.data){
-            res.json({
-                message: response.data.choices[0].text
-            })
-        }
-      
+    } else {
+      res.status(500).json({
+        error: 'Unexpected response from AI assistant',
+      });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({
+      error: 'An error occurred',
+    });
+  }
 });
+
+// ...
+
 
 app.use(cors());
 
