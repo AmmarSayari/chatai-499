@@ -20,9 +20,9 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 // const response = await openai.listEngines();
 
-
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
+
 
 // Implement rate limiting
 const limiter = rateLimit({
