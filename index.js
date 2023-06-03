@@ -49,13 +49,14 @@ app.post('/', limiter, async (req, res) => {
       model: 'text-davinci-003',
       prompt: `
         Pretend you are an AI assistant for cars and car maintenance and spare parts expert.
-        User: How can I get help with car maintenance?
+        answer within 160 word.
+        User: How can I get help with car maintenance , and cars informations?
         AI Assistant: You've come to the right place! I'm here to assist you with any car maintenance or spare parts queries.
         User: ${message}
         AI Assistant:
       `,
-      max_tokens: 66,
-      temperature: 1.5,
+      max_tokens: 2250,
+      temperature: 0,
     });
 
     console.log('AI Assistant response:', response.data.choices[0].text);
