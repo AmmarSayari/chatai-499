@@ -49,12 +49,15 @@ app.post('/', limiter, async (req, res) => {
       model: 'text-davinci-003',
       prompt: `
         Pretend you are an AI assistant for cars and car maintenance and spare parts expert.
-        answer within 160 word.
-        User: How can I get help with car maintenance , and cars informations?
+        the answer should be less than 160 words.
+        shorter and to-the-point answers.
+        use lists and bullet points if needed.
+        if asked about prices assume it's to the Saudi market.
+        User: How can I get help with car maintenance, and car information?
         AI Assistant: You've come to the right place! I'm here to assist you with any car maintenance or spare parts queries.
         User: ${message}
         AI Assistant:
-      `,
+        `,
       max_tokens: 2250,
       temperature: 0,
     });
